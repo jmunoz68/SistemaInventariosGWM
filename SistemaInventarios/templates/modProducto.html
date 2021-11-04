@@ -1,0 +1,296 @@
+{% with r = infoProducto %}
+
+<section class="u-clearfix u-container-style u-section-5">
+  <div class="u-container-style u-dialog u-radius-30 u-shape-round u-white u-dialog-1">
+
+    <div style="width: 1600px">
+      <form action="/modificarProducto"  id="envio" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form-1" style="padding: 20px;" redirect="true">
+
+      <table style="width: 90%; margin: auto; border: 1px solid black;">
+        <tr>
+          <td colspan="2">
+            <h3 style="text-align: center;">REGISTRO DE PRODUCTOS</h3>
+            <button type="button" class="close u-dialog-close-button u-icon u-text-grey-40 u-icon-1" data-dismiss="modal"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-e2c9"></use></svg><svg class="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-e2c9"><rect x="7" y="0" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="2" height="16"></rect><rect x="0" y="7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="16" height="2"></rect></svg></button>
+          </td>
+        </tr>
+        
+        <tbody>
+          <tr>
+            <td style="width: 40%; border: 1px solid black; vertical-align: top">
+              <div style="padding: 20px;">
+
+                <input type="hidden" id="idProducto" name="idProducto" value="{{r.idProducto}}" >
+                <div class="u-form-group u-form-name">
+                  <label for="name-7821" class="u-label">Codigo</label>
+                  <input type="text" placeholder="codigo" id="name-7821" name="codigo" value="{{r.codigo}}"class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="" value="{{r.codigo}}">
+                
+                </div>
+                <div class="u-form-group u-form-name">
+                  <label for="name-7821" class="u-label">Nombre</label>
+                  <input type="text" placeholder="nombre" id="name-7821" name="nombre" value="{{r.nombreProducto}}"class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="" value="{{r.nombreProducto}}">
+                
+                </div>
+                <div class="u-form-group u-form-group-2">
+                  <label for="text-efd6" class="u-label">Cantidad Minima</label>
+                  <input type="text" placeholder="Cantidad Minima" id="text-efd6" name="cantMin" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" value="{{r.cantMin}}">
+                </div>
+                <div class="u-form-group u-form-group-3">
+                  <label for="text-67ca" class="u-label">Cantidad en Bodega</label>
+                  <input type="text" placeholder="cantDispo" id="text-67ca" name="cantDispo" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" value="{{r.cantDispo}}">
+                </div>
+                
+                <div class="u-form-group u-form-select u-form-group-6">
+                  <label for="select-f7cf" class="u-label">Estado</label>
+                  <div class="u-form-select-wrapper">
+                    <select id="select-f7cf" name="estado" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" >
+                     
+                      <option value="Activo" {{r.estado1}}>Activo</option>
+                      <option value="Inactivo" {{r.estado2}}>Inactivo</option>
+                    </select>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
+                  </div>
+                </div>
+              
+              </div>
+            </td>
+
+
+            <td style="width: 60%; border: 1px solid black; vertical-align: top">
+              <table class="table">
+                <td>
+                  <tr>
+                    <th><label class="u-label" style="font-weight: bold;">PROVEEDORES RELACIONADOS: </label>
+                      <label id='textSelec' class="u-label" style="font-weight: bold;">{{r.canSelec}}</label>
+                      <input type="hidden"  id="canSelec" value={{r.canSelec}}>
+                    </th>
+                    <th><label class="u-label">Buscar <input id="searchTerm" type="text" onkeyup="doSearch()" /></label></th>
+                  </tr>                  
+                </td>
+              </table>
+              <div style="padding: 5px;">
+
+                <div>
+                  
+                  
+                  
+                  
+                  <table class="table table-hover my-5" id="datos"> 
+                    <thead class="">
+                      <tr>
+                        <th>Nit</th>
+                        <th>Razon Social</th>
+                        <th>Estado</th>
+                        <th>Seleccionar</th>
+                        </tr>
+                    </thead>
+                    <tbody class="my_dynamic_table" >
+                      {% for row in infoProveedores %}
+                                                    <tr style="height: 65px;">
+                                                        <td align="center" class="u-border-1 u-border-grey-30 u-table-cell">{{row.nit}}</td>
+                                                        <td align="center" class="u-border-1 u-border-grey-30 u-table-cell">{{row.nombre}}</td>
+                                                        <td align="center" class="u-border-1 u-border-grey-30 u-table-cell">{{row.estado }}</td>
+                                                        <td align="center" class="u-border-1 u-border-grey-30 u-table-cell">
+                                                          <input type="checkbox" onclick="cantidadSelec(this)" value={{row.idProveedor}} {{row.seleccion}}/>
+                                                        </td>
+                                                          
+                                                    </tr>
+                                                    <tr class='noSearch hide'>
+
+                                                      <td colspan="5"></td>
+
+                                                  </tr>
+                                                   
+                                                  {% endfor %}
+                      
+                    </tbody>
+                  </table>
+
+                </div>
+                <div class="u-form-email u-form-group u-form-group-5">
+                  <input type="hidden"  id="selectProv" name="selectProv" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" >
+                </div>
+
+
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="2">
+              <div class="u-align-right u-form-group u-form-submit">
+                <button type="button" id="cancelar" value="Cancelar" class="u-btn u-btn-submit u-button-style u-btn-1 u-btn-round u-radius-50 " data-dismiss="modal">Cancelar</button>
+                <button type="submit" id="enviar" value="Guardar" class="u-btn u-btn-submit u-button-style u-btn-1 u-btn-round u-radius-50">Guardar</button>
+              </div>
+        
+              <!-- <div class="u-form-send-message u-form-send-success"> Gracias! Tu mensaje ha sido enviado. </div>
+              <div class="u-form-send-error u-form-send-message">No se puede enviar su mensaje. Por favor, corrija los errores y vuelva a intentarlo.</div>
+              <input type="hidden" value="" name="recaptchaResponse"> -->
+    
+            </td>
+          </tr>
+  
+        </tbody>
+
+      </table>
+
+      </form>
+    </div>
+
+  </div>
+</section>
+
+
+<style>
+  datos {border:1px solid #ccc;padding:10px;font-size:1em;}
+  
+          datos tr:nth-child(even) {background:#ccc;}
+  
+          datos td {padding:5px;}
+  
+          datos tr.noSearch {background:White;font-size:0.8em;}
+  
+          datos tr.noSearch td {padding-top:10px;text-align:right;}
+  
+          .hide {display:none;}
+  
+          .red {color:Red;}
+  </style>
+
+<script type="text/javascript">
+  
+    $(document).submit(function() {
+      $('#enviar').ready(function(){
+          var selected = '';    
+          var i=0;
+          $('#envio input[type=checkbox]').each(function(){              
+              if (this.checked) {
+                  i = i+1                  
+                  if (i<=1){
+                    selected += $(this).val();
+                  }
+                  else{
+                    selected += ','+$(this).val();
+                  }
+                }
+          }); 
+          this.value  
+           if (selected != '') 
+           {
+             document.getElementById("selectProv").value=selected;
+           }
+          
+  
+          return false;
+      });         
+  });
+  
+
+  //Busqueda en tabla
+
+  function doSearch()
+
+        {
+
+            const tableReg = document.getElementById('datos');
+
+            const searchText = document.getElementById('searchTerm').value.toLowerCase();
+
+            let total = 0;
+
+ 
+
+            // Recorremos todas las filas con contenido de la tabla
+
+            for (let i = 1; i < tableReg.rows.length; i++) {
+
+                // Si el td tiene la clase "noSearch" no se busca en su cntenido
+
+                if (tableReg.rows[i].classList.contains("noSearch")) {
+
+                    continue;
+
+                }
+
+ 
+
+                let found = false;
+
+                const cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
+
+                // Recorremos todas las celdas
+
+                for (let j = 0; j < cellsOfRow.length && !found; j++) {
+
+                    const compareWith = cellsOfRow[j].innerHTML.toLowerCase();
+
+                    // Buscamos el texto en el contenido de la celda
+
+                    if (searchText.length == 0 || compareWith.indexOf(searchText) > -1) {
+
+                        found = true;
+
+                        total++;
+
+                    }
+
+                }
+
+                if (found) {
+
+                    tableReg.rows[i].style.display = '';
+
+                } else {
+
+                    // si no ha encontrado ninguna coincidencia, esconde la
+
+                    // fila de la tabla
+
+                    tableReg.rows[i].style.display = 'none';
+
+                }
+
+            }
+
+ 
+
+            // mostramos las coincidencias
+
+            const lastTR=tableReg.rows[tableReg.rows.length-1];
+
+            const td=lastTR.querySelector("td");
+
+            lastTR.classList.remove("hide", "red");
+
+            if (searchText == "") {
+
+                lastTR.classList.add("hide");
+
+            } else if (total) {
+
+                td.innerHTML="Total Registros Encontrados : "+total+((total>1)?"":"");
+
+            } else {
+
+                lastTR.classList.add("red");
+
+                td.innerHTML="No se han encontrado coincidencias";
+
+            }
+
+        }
+
+  //contar cantidad seleccionados
+  function cantidadSelec(obj) {
+    let canSelec = document.getElementById('canSelec');
+
+    if (obj.checked) {
+      canSelec.value = parseInt(canSelec.value) + 1;
+    } else {
+      canSelec.value = parseInt(canSelec.value) - 1;
+    }
+    document.getElementById('textSelec').innerHTML = canSelec.value;
+  }
+
+</script>
+
+{% endwith %}

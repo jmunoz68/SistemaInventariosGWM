@@ -1,0 +1,151 @@
+{% extends 'Base.html' %}
+
+{% block estilos %}
+  <link rel="stylesheet" href="/static/css/Usuarios.css" media="screen">
+{% endblock %}
+
+{% block action %}
+    <section class="u-align-center u-clearfix u-image u-shading u-section-1" id="carousel_c016" data-image-width="2250" data-image-height="1500">
+      <div class="u-align-left u-clearfix u-sheet u-sheet-1">
+        <div class="u-border-2 u-border-white u-container-style u-group u-shape-rectangle u-group-1">
+          <div class="u-container-layout u-container-layout-1">
+            <h2 class="u-subtitle u-text u-text-default u-text-1">GESTOR DE USUARIOS</h2>
+            <div class="u-border-2 u-border-white u-container-style u-expanded-width u-group u-shape-rectangle u-group-2">
+              <div class="u-container-layout u-container-layout-2">
+                <div class="u-form u-form-1">
+                  <form action="/buscarUsuarios" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;" redirect="true">
+                    <div class="u-form-group u-form-partition-factor-2 u-form-select u-form-group-1">
+                      <label for="select-82ce" class="u-label">Buscar Por</label>
+                      <div class="u-form-select-wrapper">
+                        <select id="select-82ce" name="select" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-1">
+                          {{opcBusqueda|safe}}
+                        </select>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
+                      </div>
+                    </div>
+                    <div class="u-form-group u-form-partition-factor-2 u-form-group-2">
+                      <label for="text-6982" class="u-form-control-hidden u-label"></label>
+                      <input type="text" placeholder="Texto A Buscar" id="text-6982" name="text" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-2">
+                    </div>
+                    <div class="u-align-right u-form-group u-form-submit">
+                      <a href="#" class="u-btn u-btn-submit u-button-style u-btn-1 u-btn-round u-radius-50 u-palette-1-base">Buscar</a>
+                      <input type="submit" value="submit" class="u-form-control-hidden">
+                    </div>
+                    <div class="u-form-send-message u-form-send-success"> Gracias! Tu mensaje ha sido enviado. </div>
+                    <div class="u-form-send-error u-form-send-message"> No se puede enviar su mensaje. Por favor, corrija los errores y vuelva a intentarlo. </div>
+                    <input type="hidden" value="" name="recaptchaResponse">
+                  </form>
+                </div>
+                <a data-id='0' class="usuarioAdi u-btn u-btn-round u-button-style u-dialog-link u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-2">CREAR USUARIO</a>
+                <a href="/inicio" data-page-id="917302295" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-3">Salir</a>
+                <div class="u-border-2 u-border-white u-container-style u-group u-shape-rectangle u-group-3">
+                  <div class="u-container-layout u-container-layout-3">
+                    <div class="u-container-style u-grey-15 u-group u-group-4">
+                      <div class="u-container-layout u-container-layout-4">
+                        <div class="u-align-center u-table u-table-responsive u-table-1">
+                          <p class="u-align-center u-text u-text-3"><em>
+                            {% with messages = get_flashed_messages() %}
+                              <div class=flashes><p style="color:#000000">
+                                  {% for message in messages %}
+                                      {{ message }}
+                                  {% endfor %}
+                              </p></div>
+                            {% endwith %}
+                            </em></p>
+                          <table class="u-table-entity">
+                            <colgroup>
+                              <tbody class="u-table-body">
+                                  <tr style="height: 46px;">
+                                    
+                                    {% for header in headings %}
+                                      <th class="u-align-center u-border-1 u-border-grey-30 u-table-cell u-table-cellALL">{{ header }}</th>
+                                    {% endfor %}
+                                    </tr>
+                                  {% for row in data %}
+                                    <tr style="height: 65px;">
+                                        <td align="center" class="u-border-1 u-border-grey-30 u-table-cell">{{row.usuario}}</td>
+                                        <td align="center" class="u-border-1 u-border-grey-30 u-table-cell">{{row.nombre}}</td>
+                                        <td align="center" class="u-border-1 u-border-grey-30 u-table-cell">{{row.tipoUsuario }}</td>
+                                        <td align="center" class="u-border-1 u-border-grey-30 u-table-cell">{{row.estado }}</td>
+                                        <td class="u-border-1 u-border-grey-30 u-table-cell">
+                                        <div align="center">
+                                          <span data-href="" data-id='{{row.idUsuario}}' class="usuarioMod u-dialog-link u-icon u-icon-rounded u-palette-1-base u-spacing-10 u-text-black btn-editar"></span>&nbsp;&nbsp;
+                                          <span data-href="" data-id='{{row.idUsuario}}' class="usuarioEli u-dialog-link u-icon u-icon-rounded u-palette-1-base u-spacing-10 u-text-black btn-borrar"></span>
+                                        
+                                        </div>
+                                        </td>
+                                    </tr>
+                                  {% endfor %}
+                                  
+                                </tbody>
+                            
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="u-align-justify u-border-2 u-border-white u-container-style u-group u-shape-rectangle u-group-5">
+                  <div class="u-container-layout u-container-layout-5">
+                    <h6 class="u-text u-text-default u-text-2">
+                      <span style="font-weight: 700;">Buscar Por</span>: Permite buscar información por usuario, nombre, perfil y estado<br>
+                      <br>
+                      <span style="font-weight: 700;">Texto a Buscar:</span>&nbsp;Se diligencia para realizar la busqueda<br>
+                      <br>
+                      <span style="font-weight: 700;">Crear Usuario</span>: Genera una ventana emergente para crear un nuevo usuario<br>
+                      <br>
+                      <span style="font-weight: 700;">Datos</span>: Muestra la información encontrada, de acuerdo al filtro utilizado
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <script type='text/javascript'>
+      fijar_saltoModal(document, claseMod=".usuarioMod", ruta="/ajaxUsuarioMod", 
+        campoId="id", modalClassBody=".formModalModUsuario", modalIdSeccion="#IdModalModUsuario");
+      fijar_saltoModal(document, claseMod=".usuarioEli", ruta="/ajaxUsuarioEli", 
+        campoId="id", modalClassBody=".formModalEliUsuario", modalIdSeccion="#IdModalEliUsuario");
+      fijar_saltoModal(document, claseMod=".usuarioAdi", ruta="/ajaxUsuarioMod", 
+      campoId="id", modalClassBody=".formModalModUsuario", modalIdSeccion="#IdModalModUsuario");
+    </script>
+    
+    {% endblock %}
+
+  {% block eliminar %}
+  <div class="modal fade" id="IdModalEliUsuario" role="dialog">
+    <section class="u-clearfix u-container-style u-section-4">
+     <div class="u-container-style u-dialog u-radius-16 u-shape-round u-white u-dialog-1">
+        
+        <div class="formModalEliUsuario">
+        </div>
+  
+      </div>
+      
+    
+    </section>
+  </div>
+  {% endblock %}
+
+  {% block editar %}
+
+<div class="modal fade" id="IdModalModUsuario" role="dialog">
+<section class="u-clearfix u-container-style u-section-5">
+
+  <div class="u-container-style u-dialog u-radius-30 u-shape-round u-white u-dialog-1">
+    <div class="u-container-layout u-container-layout-1">
+      <h3 class="u-text u-text-1">REGISTRO DE USUARIO</h3>
+       <button type="button" class="close u-dialog-close-button u-icon u-text-grey-40 u-icon-1" data-dismiss="modal"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-e2c9"></use></svg><svg class="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-e2c9"><rect x="7" y="0" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="2" height="16"></rect><rect x="0" y="7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="16" height="2"></rect></svg></button>
+      <div class="u-form u-form-1">
+        <div class="formModalModUsuario">
+        </div>
+      </div>
+      <a data-page-id="88368744" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-2" data-dismiss="modal">CANCELAR</a>
+    </div>
+   </section>
+</div>
+{% endblock %}

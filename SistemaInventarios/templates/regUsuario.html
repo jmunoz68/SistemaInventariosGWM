@@ -1,0 +1,36 @@
+{% with r = infoUsuario %}
+<form action="/registrarUsuario" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form-1" style="padding: 10px;" redirect="true">
+    <input type="hidden" id="idUsuario" name="idUsuario" value="{{r.idUsuario}}" >
+    <div class="u-form-group u-form-group-2">
+      <label for="name-0f37" class="u-label">Cedula</label>
+      <input type="text" placeholder="Introduzca su cedula" id="name-0f37" name="cedula" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="" value="{{r.cedula}}">
+    </div>
+    <div class="u-form-group u-form-group-2">
+      <label for="nombre-0f37" class="u-label">Nombre Completo</label>
+      <input type="text" placeholder="Nombre Completo" id="nombre-0f37" name="nombre" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required" value="{{r.nombre}}">
+    </div>
+    <div class="u-form-group u-form-group-3">
+      <label for="direccion-67ca" class="u-label">Dirección</label>
+      <input type="text" placeholder="Dirección" id="direccion-67ca" name="direccion" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" value="{{r.direccion}}">
+    </div>
+    <div class="u-form-email u-form-group u-form-group-5">
+      <label for="email-d318" class="u-label">Correo Electrónico</label>
+      <input type="email" placeholder="Introduzca una dirección de correo electrónico válida" id="email-d318" name="email" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="" value="{{r.email}}">
+    </div>
+    <div class="u-form-group u-form-group-7">
+      <label for="clave-65e8" class="u-label">Contraseña</label>
+      <input type="password" placeholder="Contraseña" id="clave-65e8" name="clave" autocomplete="" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" value="{{r.clave}}">
+    </div>
+    <a>&nbsp;&nbsp;&nbsp;</a><a href="#" id="doc-polica-datos" style="color:black ;font-weight: bold; text-decoration: underline;">Politica de datos</a><br>
+    <div class="u-form-checkbox u-form-group u-form-group-8">
+      <input type="checkbox" id="checkbox-1c85" name="aceptarPolitica" {{r.aceptarPoliticaChk}}>
+      <label for="checkbox-1c85" class="u-label">Aceptar la politica de datos</label>
+    </div>
+    <div class="u-align-right u-form-group u-form-submit">
+      <button type="submit" name="botonAceptar" value="Guardar" class="u-btn u-btn-submit u-button-style u-btn-1 u-btn-round u-radius-50">Aceptar</button>
+    </div>
+</form>
+<script type='text/javascript'>
+  fijar_abrirNuevoTab(document, idSeccion="#doc-polica-datos", url="/static/docs/politica_de_datos_gwm_2021.pdf");
+</script>
+{% endwith %}

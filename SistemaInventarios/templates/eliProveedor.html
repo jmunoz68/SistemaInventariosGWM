@@ -1,0 +1,25 @@
+{% with r = infoProveedor %}
+<form action="/eliminarProveedor" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form-1" style="padding: 10px;" redirect="true">
+    <input type="hidden" id="idProveedor" name="idProveedor" value="{{r.idProveedor}}" >
+    <table>
+      <tr>
+        <div class="u-align-center u-form-group">
+          <p class="u-text u-text-1">Esta seguro que desea eliminar </p>
+          <p class="u-text u-text-1">el registro de "{{r.nombre}}"?</p>
+        </div>
+      </tr>
+      <tr>
+        <td>
+          <div class="u-align-right u-form-group u-form-submit">
+            <button type="submit" name="sino" value="Si" class="u-btn u-btn-submit u-button-style u-btn-1 u-btn-round u-radius-50">Si</button>
+          </div>
+        </td>
+        <td>
+          <div class="u-align-right u-form-group u-form-submit">
+            <button type="submit" name="sino" value="No" class="u-btn u-btn-submit u-button-style u-btn-1 u-btn-round u-radius-50">No</button>
+          </div>
+        </td>
+      </tr>
+    </table>
+</form>
+{% endwith %}
